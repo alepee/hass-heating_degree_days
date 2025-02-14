@@ -9,8 +9,9 @@
     "recorder"
   ],
   "documentation": "https://github.com/alepee/hass-heating_degree_days",
+  "integration_type": "helper",
   "iot_class": "calculated",
   "issue_tracker": "https://github.com/alepee/hass-heating_degree_days/issues",
   "requirements": [],
-  "version": "1.0.0-alpha.1"
+  "version": "1.0.0-alpha.2"
 }
