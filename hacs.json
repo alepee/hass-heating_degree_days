@@ -2,5 +2,6 @@
   "name": "Heating Degree Days",
   "homeassistant": "2024.1.0",
   "filename": "heating_degree_days.zip",
-  "zip_release": true
+  "zip_release": true,
+  "render_readme": true
 }

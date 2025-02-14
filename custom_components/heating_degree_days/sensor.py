@@ -38,6 +38,7 @@ def calculate_hdd_from_readings(
 
     Returns:
         float: Calculated HDD value
+
     """
     if not readings:
         return 0
@@ -80,6 +81,7 @@ async def get_temperature_readings(
 
     Returns:
         List[Tuple[datetime, float]]: List of (timestamp, temperature) tuples
+
     """
     temp_history = await get_instance(hass).async_add_executor_job(
         get_significant_states, hass, start_time, end_time, [entity_id]
@@ -137,7 +139,6 @@ class HDDSensor(CoordinatorEntity, SensorEntity):
 
     _attr_device_class = SensorDeviceClass.TEMPERATURE
     _attr_state_class = SensorStateClass.MEASUREMENT
-    _attr_native_unit_of_measurement = "HDD"
 
     def __init__(
         self,
@@ -149,6 +150,7 @@ class HDDSensor(CoordinatorEntity, SensorEntity):
         self.sensor_type = sensor_type
         self._attr_unique_id = f"{DOMAIN}_{sensor_type}"
         self._attr_name = f"HDD {sensor_type.capitalize()}"
+        self._attr_native_unit_of_measurement = f"{coordinator.temperature_unit}·d"
 
     @property
     def native_value(self):

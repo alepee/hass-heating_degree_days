@@ -21,6 +21,7 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
         hass: HomeAssistant,
         temp_entity: str,
         base_temp: float,
+        temperature_unit: str,
     ):
         """Initialize."""
         super().__init__(
@@ -31,6 +32,7 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
         )
         self.temp_entity = temp_entity
         self.base_temp = base_temp
+        self.temperature_unit = temperature_unit
         self.temperature_history = []
 
     async def _async_update_data(self):

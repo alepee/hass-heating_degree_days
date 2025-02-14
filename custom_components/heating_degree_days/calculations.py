@@ -18,6 +18,7 @@ def calculate_hdd_from_readings(
 
     Returns:
         float: Calculated HDD value
+
     """
     if not readings:
         return 0
@@ -62,6 +63,7 @@ async def get_temperature_readings(
 
     Returns:
         List[Tuple[datetime, float]]: List of (timestamp, temperature) tuples
+
     """
     temp_history = await get_instance(hass).async_add_executor_job(
         get_significant_states, hass, start_time, end_time, [entity_id]
