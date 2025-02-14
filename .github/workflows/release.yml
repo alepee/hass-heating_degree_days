@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release_zip_file:
+    name: Prepare release asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # Pack the heating_degree_days dir as a zip and upload to the release
+      - name: ZIP heating_degree_days Dir
+        run: |
+          cd ${{ github.workspace }}/custom_components/heating_degree_days
+          zip heating_degree_days.zip -r ./
+      - name: Upload zip to release
+        uses: svenstaro/upload-release-action@2.9.0
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.workspace }}/custom_components/heating_degree_days/heating_degree_days.zip
+          asset_name: heating_degree_days.zip
+          tag: ${{ github.ref }}
+          overwrite: true

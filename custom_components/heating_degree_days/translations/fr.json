@@ -1,0 +1,27 @@
+{
+  "title": "Degrés-Jours de Chauffage",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Degrés-Jours de Chauffage",
+        "description": "Configurer le calcul des degrés-jours de chauffage",
+        "data": {
+          "temperature_sensor": "Capteur de température extérieure",
+          "base_temperature": "Température de base",
+          "temperature_unit": "Unité de température"
+        }
+      }
+    },
+    "error": {
+      "invalid_temperature_sensor": "Capteur de température invalide. Veuillez sélectionner un capteur de température valide."
+    }
+  },
+  "selector": {
+    "temperature_unit": {
+      "options": {
+        "°C": "Celsius (°C)",
+        "°F": "Fahrenheit (°F)"
+      }
+    }
+  }
+}

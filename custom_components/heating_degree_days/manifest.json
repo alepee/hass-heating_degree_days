@@ -1,0 +1,12 @@
+{
+  "domain": "heating_degree_days",
+  "name": "Heating Degree Days",
+  "version": "1.0.0",
+  "documentation": "https://github.com/alepee/hass-heating_degree_days",
+  "dependencies": [],
+  "codeowners": [
+    "@alepee"
+  ],
+  "config_flow": true,
+  "iot_class": "calculated"
+}

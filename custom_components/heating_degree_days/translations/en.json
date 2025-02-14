@@ -1,0 +1,27 @@
+{
+  "title": "Heating Degree Days",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Heating Degree Days",
+        "description": "Set up Heating Degree Days calculation",
+        "data": {
+          "temperature_sensor": "Outdoor Temperature Sensor",
+          "base_temperature": "Base Temperature",
+          "temperature_unit": "Temperature Unit"
+        }
+      }
+    },
+    "error": {
+      "invalid_temperature_sensor": "Invalid temperature sensor. Please select a valid temperature sensor."
+    }
+  },
+  "selector": {
+    "temperature_unit": {
+      "options": {
+        "°C": "Celsius (°C)",
+        "°F": "Fahrenheit (°F)"
+      }
+    }
+  }
+}
