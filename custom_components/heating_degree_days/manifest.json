@@ -1,0 +1,16 @@
+{
+  "domain": "heating_degree_days",
+  "name": "Heating Degree Days",
+  "codeowners": [
+    "@alepee"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "recorder"
+  ],
+  "documentation": "https://github.com/alepee/hass-heating_degree_days",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/alepee/hass-heating_degree_days/issues",
+  "requirements": [],
+  "version": "1.0.0-alpha.1"
+}
