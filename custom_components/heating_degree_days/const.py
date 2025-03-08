@@ -1,4 +1,4 @@
-"""Constants for the Heating Degree Days integration."""
+"""Constants for the Heating & Cooling Degree Days integration."""
 
 from datetime import timedelta
 
@@ -7,14 +7,27 @@ DOMAIN = "heating_degree_days"
 CONF_TEMPERATURE_SENSOR = "temperature_sensor"
 CONF_BASE_TEMPERATURE = "base_temperature"
 CONF_TEMPERATURE_UNIT = "temperature_unit"
+CONF_INCLUDE_COOLING = "include_cooling"
 
-DEFAULT_BASE_TEMPERATURE = 19.0
-SCAN_INTERVAL = timedelta(hours=1)
+DEFAULT_BASE_TEMPERATURE = 65.0
+DEFAULT_NAME = "Heating & Cooling Degree Days"
+DEFAULT_INCLUDE_COOLING = False
+SCAN_INTERVAL = timedelta(minutes=5)
 
-# Sensor types
-SENSOR_TYPE_DAILY = "daily"
-SENSOR_TYPE_WEEKLY = "weekly"
-SENSOR_TYPE_MONTHLY = "monthly"
+# HDD Sensor types
+SENSOR_TYPE_HDD_DAILY = "hdd_daily"
+SENSOR_TYPE_HDD_WEEKLY = "hdd_weekly"
+SENSOR_TYPE_HDD_MONTHLY = "hdd_monthly"
+
+# For backward compatibility
+SENSOR_TYPE_DAILY = SENSOR_TYPE_HDD_DAILY
+SENSOR_TYPE_WEEKLY = SENSOR_TYPE_HDD_WEEKLY
+SENSOR_TYPE_MONTHLY = SENSOR_TYPE_HDD_MONTHLY
+
+# CDD Sensor types
+SENSOR_TYPE_CDD_DAILY = "cdd_daily"
+SENSOR_TYPE_CDD_WEEKLY = "cdd_weekly"
+SENSOR_TYPE_CDD_MONTHLY = "cdd_monthly"
 
 # Attributes
 ATTR_BASE_TEMPERATURE = "base_temperature"

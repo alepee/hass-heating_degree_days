@@ -1,4 +1,4 @@
-"""Config flow for Heating Degree Days integration."""
+"""Config flow for Heating & Cooling Degree Days integration."""
 
 import voluptuous as vol
 
@@ -8,9 +8,11 @@ from homeassistant.helpers import selector
 
 from .const import (
     CONF_BASE_TEMPERATURE,
+    CONF_INCLUDE_COOLING,
     CONF_TEMPERATURE_SENSOR,
     CONF_TEMPERATURE_UNIT,
     DEFAULT_BASE_TEMPERATURE,
+    DEFAULT_INCLUDE_COOLING,
     DOMAIN,
 )
 
@@ -21,7 +23,7 @@ TEMPERATURE_UNIT_MAPPING = {
 
 
 class HDDConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Heating Degree Days."""
+    """Handle a config flow for Heating & Cooling Degree Days."""
 
     VERSION = 1
 
@@ -71,6 +73,9 @@ class HDDConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             translation_key="temperature_unit",
                         )
                     ),
+                    vol.Required(
+                        CONF_INCLUDE_COOLING, default=DEFAULT_INCLUDE_COOLING
+                    ): selector.BooleanSelector(),
                 }
             ),
             errors=errors,

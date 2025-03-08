@@ -1,14 +1,15 @@
 {
-  "title": "Heating Degree Days",
+  "title": "Heating & Cooling Degree Days",
   "config": {
     "step": {
       "user": {
-        "title": "Heating Degree Days",
-        "description": "Set up Heating Degree Days calculation",
+        "title": "Heating & Cooling Degree Days",
+        "description": "Set up Heating and Cooling Degree Days calculation",
         "data": {
           "temperature_sensor": "Outdoor Temperature Sensor",
           "base_temperature": "Base Temperature",
-          "temperature_unit": "Temperature Unit"
+          "temperature_unit": "Temperature Unit",
+          "include_cooling": "Include Cooling Degree Days (CDD)"
         }
       }
     },
@@ -23,5 +24,38 @@
         "fahrenheit": "Fahrenheit (°F)"
       }
     }
+  },
+  "entity": {
+    "sensor": {
+      "hdd_daily": {
+        "name": "HDD Daily",
+        "description": "Heating Degree Days for the previous day"
+      },
+      "hdd_weekly": {
+        "name": "HDD Weekly",
+        "description": "Heating Degree Days for the previous week"
+      },
+      "hdd_monthly": {
+        "name": "HDD Monthly",
+        "description": "Heating Degree Days for the previous month"
+      },
+      "cdd_daily": {
+        "name": "CDD Daily",
+        "description": "Cooling Degree Days for the previous day"
+      },
+      "cdd_weekly": {
+        "name": "CDD Weekly",
+        "description": "Cooling Degree Days for the previous week"
+      },
+      "cdd_monthly": {
+        "name": "CDD Monthly",
+        "description": "Cooling Degree Days for the previous month"
+      }
+    }
+  },
+  "attributes": {
+    "base_temperature": "Base Temperature",
+    "date_range": "Date Range",
+    "mean_temperature": "Mean Temperature"
   }
 }
