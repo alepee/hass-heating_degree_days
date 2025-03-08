@@ -29,13 +29,36 @@ change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 
 template: |
-  [![Downloads for this release](https://img.shields.io/github/downloads/alepee/hass-heating_cooling_degree_days/v$RESOLVED_VERSION/total.svg)](https://github.com/alepee/hass-heating_cooling_degree_days/releases/v$RESOLVED_VERSION)
+  # Heating & Cooling Degree Days - Release v$RESOLVED_VERSION
 
-  ### Don't forget to run `make lint` and `make bump` before releasing new version
+  [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/alepee/hass-heating_cooling_degree_days/releases/tag/v$RESOLVED_VERSION)
+  [![Download](https://img.shields.io/github/downloads/alepee/hass-heating_cooling_degree_days/v$RESOLVED_VERSION/total)](https://github.com/alepee/hass-heating_cooling_degree_days/releases/tag/v$RESOLVED_VERSION)
 
-  ## Changes
+  L'intégration Heating & Cooling Degree Days calcule les degrés-jours de chauffage (HDD) et de refroidissement (CDD) basés sur les mesures de température extérieure. Ces mesures sont conçues pour quantifier la demande d'énergie nécessaire pour chauffer ou refroidir un bâtiment.
+
+  ## ✨ Nouveautés
 
   $CHANGES
+
+  ## 📋 Compatibilité
+  - Versions minimales requises :
+    - Home Assistant Core: 2024.1.0
+    - HACS: 1.32.0
+
+  ## 🔧 Installation / Mise à jour
+
+  ### Via HACS (recommandé)
+  1. Ouvrez HACS
+  2. Recherchez "Heating & Cooling Degree Days"
+  3. Téléchargez la dernière version
+  4. Redémarrez Home Assistant
+
+  ### Installation manuelle
+  1. Téléchargez [heating_cooling_degree_days.zip](https://github.com/alepee/hass-heating_cooling_degree_days/releases/download/v$RESOLVED_VERSION/heating_cooling_degree_days.zip)
+  2. Extrayez le contenu dans votre dossier `custom_components`
+  3. Redémarrez Home Assistant
+
+  > 💡 **Note pour les développeurs**: N'oubliez pas d'exécuter `make lint` et `make bump` avant de publier une nouvelle version.
 
 autolabeler:
   - label: "maintenance"

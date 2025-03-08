@@ -1,6 +1,4 @@
 {
-  "title": "Heating Degree Days",
-  "title_with_cooling": "Heating & Cooling Degree Days",
   "config": {
     "step": {
       "user": {
@@ -31,34 +29,23 @@
   "entity": {
     "sensor": {
       "hdd_daily": {
-        "name": "HDD Daily",
-        "description": "Heating Degree Days for the previous day"
+        "name": "HDD Daily"
       },
       "hdd_weekly": {
-        "name": "HDD Weekly",
-        "description": "Heating Degree Days for the previous week"
+        "name": "HDD Weekly"
       },
       "hdd_monthly": {
-        "name": "HDD Monthly",
-        "description": "Heating Degree Days for the previous month"
+        "name": "HDD Monthly"
       },
       "cdd_daily": {
-        "name": "CDD Daily",
-        "description": "Cooling Degree Days for the previous day"
+        "name": "CDD Daily"
       },
       "cdd_weekly": {
-        "name": "CDD Weekly",
-        "description": "Cooling Degree Days for the previous week"
+        "name": "CDD Weekly"
       },
       "cdd_monthly": {
-        "name": "CDD Monthly",
-        "description": "Cooling Degree Days for the previous month"
+        "name": "CDD Monthly"
       }
     }
-  },
-  "attributes": {
-    "base_temperature": "Base Temperature",
-    "date_range": "Date Range",
-    "mean_temperature": "Mean Temperature"
   }
 }

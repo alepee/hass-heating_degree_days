@@ -1,6 +1,4 @@
 {
-  "title": "Degrés-Jours de Chauffage",
-  "title_with_cooling": "Degrés-Jours de Chauffage et de Refroidissement",
   "config": {
     "step": {
       "user": {
@@ -31,34 +29,23 @@
   "entity": {
     "sensor": {
       "hdd_daily": {
-        "name": "DJC Journalier",
-        "description": "Degrés-jours de chauffage pour la journée précédente"
+        "name": "DJC Journalier"
       },
       "hdd_weekly": {
-        "name": "DJC Hebdomadaire",
-        "description": "Degrés-jours de chauffage pour la semaine précédente"
+        "name": "DJC Hebdomadaire"
       },
       "hdd_monthly": {
-        "name": "DJC Mensuel",
-        "description": "Degrés-jours de chauffage pour le mois précédent"
+        "name": "DJC Mensuel"
       },
       "cdd_daily": {
-        "name": "DJR Journalier",
-        "description": "Degrés-jours de refroidissement pour la journée précédente"
+        "name": "DJR Journalier"
       },
       "cdd_weekly": {
-        "name": "DJR Hebdomadaire",
-        "description": "Degrés-jours de refroidissement pour la semaine précédente"
+        "name": "DJR Hebdomadaire"
       },
       "cdd_monthly": {
-        "name": "DJR Mensuel",
-        "description": "Degrés-jours de refroidissement pour le mois précédent"
+        "name": "DJR Mensuel"
       }
     }
-  },
-  "attributes": {
-    "base_temperature": "Température de base",
-    "date_range": "Période",
-    "mean_temperature": "Température moyenne"
   }
 }
