@@ -1,4 +1,4 @@
-"""Sensor platform for heating_degree_days."""
+"""Sensor platform for heating_cooling_degree_days."""
 
 import calendar
 from datetime import timedelta

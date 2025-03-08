@@ -35,7 +35,7 @@ This method provides more accurate results than simple daily averages, especiall
 
 ### Using HACS (recommended)
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=astrandb&repository=heating_degree_days)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=alepee&repository=heating_cooling_degree_days)
 
 1. Open HACS
 2. Click on "Custom Repositories"
@@ -45,7 +45,7 @@ This method provides more accurate results than simple daily averages, especiall
 
 ### Manual Installation
 
-1. Copy the `heating_degree_days` folder from `custom_components` to your Home Assistant's `custom_components` directory
+1. Copy the `heating_cooling_degree_days` folder from `custom_components` to your Home Assistant's `custom_components` directory
 2. Restart Home Assistant
 
 ## Configuration

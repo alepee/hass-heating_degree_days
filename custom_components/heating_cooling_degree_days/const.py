@@ -2,7 +2,7 @@
 
 from datetime import timedelta
 
-DOMAIN = "heating_degree_days"
+DOMAIN = "heating_cooling_degree_days"
 
 CONF_TEMPERATURE_SENSOR = "temperature_sensor"
 CONF_BASE_TEMPERATURE = "base_temperature"

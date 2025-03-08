@@ -1,5 +1,5 @@
 {
-  "domain": "heating_degree_days",
+  "domain": "heating_cooling_degree_days",
   "name": "Heating & Cooling Degree Days",
   "codeowners": [
     "@alepee"
@@ -8,9 +8,9 @@
   "dependencies": [
     "recorder"
   ],
-  "documentation": "https://github.com/alepee/hass-heating_degree_days",
+  "documentation": "https://github.com/alepee/hass-heating_cooling_degree_days",
   "iot_class": "calculated",
-  "issue_tracker": "https://github.com/alepee/hass-heating_degree_days/issues",
+  "issue_tracker": "https://github.com/alepee/hass-heating_cooling_degree_days/issues",
   "requirements": [],
   "version": "1.0.0"
 }

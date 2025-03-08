@@ -1,5 +1,5 @@
 {
-    "name": "heating_degree_days-dev",
+    "name": "heating_cooling_degree_days-dev",
     "image": "mcr.microsoft.com/devcontainers/python:3.13",
     "postCreateCommand": "scripts/setup",
     "appPort": [

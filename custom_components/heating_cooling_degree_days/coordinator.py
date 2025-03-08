@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for heating_degree_days."""
+"""DataUpdateCoordinator for heating_cooling_degree_days."""
 
 import calendar
 from collections import defaultdict

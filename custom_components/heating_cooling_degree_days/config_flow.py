@@ -30,7 +30,7 @@ TEMPERATURE_UNIT_MAPPING = {
     "fahrenheit": UnitOfTemperature.FAHRENHEIT,
 }
 
-# Simple English titles
+# Fixed titles in English
 TITLE_STANDARD = "Heating Degree Days"
 TITLE_WITH_COOLING = "Heating & Cooling Degree Days"
 
@@ -49,22 +49,21 @@ class HDDConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
 
         if user_input is not None:
-            # Map the temperature unit from the selector to the HA constant
-            if CONF_TEMPERATURE_UNIT in user_input:
+            # Validate the temperature sensor
+            if not self._validate_sensor(user_input[CONF_TEMPERATURE_SENSOR]):
+                errors["base"] = "invalid_temperature_sensor"
+
+            if not errors:
+                # Map the temperature unit selection to the actual unit
                 user_input[CONF_TEMPERATURE_UNIT] = TEMPERATURE_UNIT_MAPPING[
                     user_input[CONF_TEMPERATURE_UNIT]
                 ]
 
-            # Validate the temperature sensor exists
-            if not await self.hass.async_add_executor_job(
-                self._validate_sensor, user_input[CONF_TEMPERATURE_SENSOR]
-            ):
-                errors[CONF_TEMPERATURE_SENSOR] = "invalid_temperature_sensor"
-            else:
-                # Get appropriate title
                 include_cooling = user_input.get(
                     CONF_INCLUDE_COOLING, DEFAULT_INCLUDE_COOLING
                 )
+
+                # Use simple fixed titles
                 title = TITLE_WITH_COOLING if include_cooling else TITLE_STANDARD
 
                 _LOGGER.debug("Creating integration with title: %s", title)

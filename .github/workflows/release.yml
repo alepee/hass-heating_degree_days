@@ -17,16 +17,16 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Pack the heating_degree_days dir as a zip and upload to the release
-      - name: ZIP heating_degree_days Dir
+      # Pack the heating_cooling_degree_days dir as a zip and upload to the release
+      - name: ZIP heating_cooling_degree_days Dir
         run: |
-          cd ${{ github.workspace }}/custom_components/heating_degree_days
-          zip heating_degree_days.zip -r ./
+          cd ${{ github.workspace }}/custom_components/heating_cooling_degree_days
+          zip heating_cooling_degree_days.zip -r ./
       - name: Upload zip to release
         uses: svenstaro/upload-release-action@2.9.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/custom_components/heating_degree_days/heating_degree_days.zip
-          asset_name: heating_degree_days.zip
+          file: ${{ github.workspace }}/custom_components/heating_cooling_degree_days/heating_cooling_degree_days.zip
+          asset_name: heating_cooling_degree_days.zip
           tag: ${{ github.ref }}
           overwrite: true
