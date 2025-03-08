@@ -47,25 +47,33 @@ async def async_setup_entry(
         coordinator.temperature_unit,
     )
 
-    # Add HDD sensors (always)
-    sensors = [
-        DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_DAILY),
-        DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_WEEKLY),
-        DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_MONTHLY),
-    ]
+    # Start with the daily HDD sensor which is always included
+    sensors = [DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_DAILY)]
+    _LOGGER.debug("Created HDD daily sensor")
 
-    _LOGGER.debug("Created HDD sensors: daily, weekly, and monthly")
+    # Add weekly and monthly HDD sensors if enabled
+    if coordinator.include_weekly:
+        sensors.append(DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_WEEKLY))
+        _LOGGER.debug("Created HDD weekly sensor")
+
+    if coordinator.include_monthly:
+        sensors.append(DegreeDegreeSensor(coordinator, SENSOR_TYPE_HDD_MONTHLY))
+        _LOGGER.debug("Created HDD monthly sensor")
 
     # Add CDD sensors if enabled
     if coordinator.include_cooling:
-        sensors.extend(
-            [
-                DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_DAILY),
-                DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_WEEKLY),
-                DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_MONTHLY),
-            ]
-        )
-        _LOGGER.debug("Created CDD sensors: daily, weekly, and monthly")
+        # Daily CDD sensor is always included if cooling is enabled
+        sensors.append(DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_DAILY))
+        _LOGGER.debug("Created CDD daily sensor")
+
+        # Add weekly and monthly CDD sensors if both cooling and respective period are enabled
+        if coordinator.include_weekly:
+            sensors.append(DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_WEEKLY))
+            _LOGGER.debug("Created CDD weekly sensor")
+
+        if coordinator.include_monthly:
+            sensors.append(DegreeDegreeSensor(coordinator, SENSOR_TYPE_CDD_MONTHLY))
+            _LOGGER.debug("Created CDD monthly sensor")
     else:
         _LOGGER.debug("CDD sensors not enabled in configuration")
 

@@ -9,9 +9,13 @@ from homeassistant.core import HomeAssistant
 from .const import (
     CONF_BASE_TEMPERATURE,
     CONF_INCLUDE_COOLING,
+    CONF_INCLUDE_MONTHLY,
+    CONF_INCLUDE_WEEKLY,
     CONF_TEMPERATURE_SENSOR,
     CONF_TEMPERATURE_UNIT,
     DEFAULT_INCLUDE_COOLING,
+    DEFAULT_INCLUDE_MONTHLY,
+    DEFAULT_INCLUDE_WEEKLY,
     DOMAIN,
 )
 from .coordinator import HDDDataUpdateCoordinator
@@ -28,25 +32,32 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entry.entry_id,
     )
 
-    # Check if include_cooling is in the entry data, if not set default
+    # Check if options are in the entry data, if not set defaults
     include_cooling = entry.data.get(CONF_INCLUDE_COOLING, DEFAULT_INCLUDE_COOLING)
+    include_weekly = entry.data.get(CONF_INCLUDE_WEEKLY, DEFAULT_INCLUDE_WEEKLY)
+    include_monthly = entry.data.get(CONF_INCLUDE_MONTHLY, DEFAULT_INCLUDE_MONTHLY)
 
     # Log the configuration
     _LOGGER.debug(
-        "Configuration: temperature_sensor=%s, base_temperature=%.1f, temperature_unit=%s, include_cooling=%s",
+        "Configuration: temperature_sensor=%s, base_temperature=%.1f, temperature_unit=%s, "
+        "include_cooling=%s, include_weekly=%s, include_monthly=%s",
         entry.data[CONF_TEMPERATURE_SENSOR],
         entry.data[CONF_BASE_TEMPERATURE],
         entry.data[CONF_TEMPERATURE_UNIT],
         "Yes" if include_cooling else "No",
+        "Yes" if include_weekly else "No",
+        "Yes" if include_monthly else "No",
     )
 
     try:
         coordinator = HDDDataUpdateCoordinator(
-            hass,
-            entry.data[CONF_TEMPERATURE_SENSOR],
-            entry.data[CONF_BASE_TEMPERATURE],
-            entry.data[CONF_TEMPERATURE_UNIT],
-            include_cooling,
+            hass=hass,
+            temp_entity=entry.data[CONF_TEMPERATURE_SENSOR],
+            base_temp=entry.data[CONF_BASE_TEMPERATURE],
+            temperature_unit=entry.data[CONF_TEMPERATURE_UNIT],
+            include_cooling=include_cooling,
+            include_weekly=include_weekly,
+            include_monthly=include_monthly,
         )
 
         # Do the initial data refresh

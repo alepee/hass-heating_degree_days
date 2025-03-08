@@ -1,5 +1,6 @@
 {
-  "title": "Heating & Cooling Degree Days",
+  "title": "Heating Degree Days",
+  "title_with_cooling": "Heating & Cooling Degree Days",
   "config": {
     "step": {
       "user": {
@@ -9,7 +10,9 @@
           "temperature_sensor": "Outdoor Temperature Sensor",
           "base_temperature": "Base Temperature",
           "temperature_unit": "Temperature Unit",
-          "include_cooling": "Include Cooling Degree Days (CDD)"
+          "include_cooling": "Include Cooling Degree Days (CDD)",
+          "include_weekly": "Include Weekly Sensors",
+          "include_monthly": "Include Monthly Sensors"
         }
       }
     },

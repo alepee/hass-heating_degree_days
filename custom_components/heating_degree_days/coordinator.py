@@ -38,6 +38,8 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
         base_temp: float,
         temperature_unit: str,
         include_cooling: bool = False,
+        include_weekly: bool = True,
+        include_monthly: bool = True,
     ):
         """Initialize."""
         super().__init__(
@@ -50,6 +52,8 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
         self.base_temp = base_temp
         self.temperature_unit = temperature_unit
         self.include_cooling = include_cooling
+        self.include_weekly = include_weekly
+        self.include_monthly = include_monthly
         self.temperature_history = []
         self.daily_values = defaultdict(float)  # Storage for daily values by date
         self.daily_cdd_values = defaultdict(
@@ -57,11 +61,14 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
         )  # Storage for daily CDD values by date
 
         _LOGGER.info(
-            "Initialized HDDDataUpdateCoordinator with sensor %s, base temp %.1f°%s, cooling: %s",
+            "Initialized HDDDataUpdateCoordinator with sensor %s, base temp %.1f°%s, "
+            "cooling: %s, weekly: %s, monthly: %s",
             temp_entity,
             base_temp,
             temperature_unit,
             "enabled" if include_cooling else "disabled",
+            "enabled" if include_weekly else "disabled",
+            "enabled" if include_monthly else "disabled",
         )
 
     async def _async_update_data(self):
@@ -92,18 +99,27 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
                 yesterday_start.isoformat(),
                 today_start.isoformat(),
             )
-            return (
-                self.data
-                if self.data
-                else {
-                    SENSOR_TYPE_HDD_DAILY: 0,
-                    SENSOR_TYPE_HDD_WEEKLY: 0,
-                    SENSOR_TYPE_HDD_MONTHLY: 0,
-                    SENSOR_TYPE_CDD_DAILY: 0 if self.include_cooling else None,
-                    SENSOR_TYPE_CDD_WEEKLY: 0 if self.include_cooling else None,
-                    SENSOR_TYPE_CDD_MONTHLY: 0 if self.include_cooling else None,
-                }
-            )
+            # Prepare empty result based on enabled types
+            result = {
+                SENSOR_TYPE_HDD_DAILY: 0,
+            }
+
+            if self.include_weekly:
+                result[SENSOR_TYPE_HDD_WEEKLY] = 0
+
+            if self.include_monthly:
+                result[SENSOR_TYPE_HDD_MONTHLY] = 0
+
+            if self.include_cooling:
+                result[SENSOR_TYPE_CDD_DAILY] = 0
+
+                if self.include_weekly:
+                    result[SENSOR_TYPE_CDD_WEEKLY] = 0
+
+                if self.include_monthly:
+                    result[SENSOR_TYPE_CDD_MONTHLY] = 0
+
+            return self.data if self.data else result
 
         _LOGGER.debug("Retrieved %d temperature readings", len(daily_readings))
 
@@ -145,42 +161,35 @@ class HDDDataUpdateCoordinator(DataUpdateCoordinator):
                 old_cdd_count,
             )
 
-        # Calculate weekly and monthly HDD by summing daily values
-        weekly_hdd = self._calculate_current_week_hdd(yesterday_date)
-        monthly_hdd = self._calculate_current_month_hdd(yesterday_date)
-
-        _LOGGER.debug(
-            "Calculated period values - Weekly HDD: %.2f, Monthly HDD: %.2f",
-            weekly_hdd,
-            monthly_hdd,
-        )
-
-        # Prepare result dict
+        # Prepare result dict - daily values are always included
         result = {
             SENSOR_TYPE_HDD_DAILY: daily_hdd,
-            SENSOR_TYPE_HDD_WEEKLY: weekly_hdd,
-            SENSOR_TYPE_HDD_MONTHLY: monthly_hdd,
         }
+
+        # Add weekly and monthly HDD if enabled
+        if self.include_weekly:
+            weekly_hdd = self._calculate_current_week_hdd(yesterday_date)
+            result[SENSOR_TYPE_HDD_WEEKLY] = weekly_hdd
+            _LOGGER.debug("Calculated weekly HDD: %.2f", weekly_hdd)
+
+        if self.include_monthly:
+            monthly_hdd = self._calculate_current_month_hdd(yesterday_date)
+            result[SENSOR_TYPE_HDD_MONTHLY] = monthly_hdd
+            _LOGGER.debug("Calculated monthly HDD: %.2f", monthly_hdd)
 
         # Add CDD data if enabled
         if self.include_cooling:
-            # Calculate weekly and monthly CDD by summing daily values
-            weekly_cdd = self._calculate_current_week_cdd(yesterday_date)
-            monthly_cdd = self._calculate_current_month_cdd(yesterday_date)
+            result[SENSOR_TYPE_CDD_DAILY] = daily_cdd
 
-            _LOGGER.debug(
-                "Calculated period values - Weekly CDD: %.2f, Monthly CDD: %.2f",
-                weekly_cdd,
-                monthly_cdd,
-            )
+            if self.include_weekly:
+                weekly_cdd = self._calculate_current_week_cdd(yesterday_date)
+                result[SENSOR_TYPE_CDD_WEEKLY] = weekly_cdd
+                _LOGGER.debug("Calculated weekly CDD: %.2f", weekly_cdd)
 
-            result.update(
-                {
-                    SENSOR_TYPE_CDD_DAILY: daily_cdd,
-                    SENSOR_TYPE_CDD_WEEKLY: weekly_cdd,
-                    SENSOR_TYPE_CDD_MONTHLY: monthly_cdd,
-                }
-            )
+            if self.include_monthly:
+                monthly_cdd = self._calculate_current_month_cdd(yesterday_date)
+                result[SENSOR_TYPE_CDD_MONTHLY] = monthly_cdd
+                _LOGGER.debug("Calculated monthly CDD: %.2f", monthly_cdd)
 
         return result
 

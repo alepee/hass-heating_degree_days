@@ -1,5 +1,6 @@
 {
-  "title": "Degrés-Jours de Chauffage et de Refroidissement",
+  "title": "Degrés-Jours de Chauffage",
+  "title_with_cooling": "Degrés-Jours de Chauffage et de Refroidissement",
   "config": {
     "step": {
       "user": {
@@ -9,7 +10,9 @@
           "temperature_sensor": "Capteur de température extérieure",
           "base_temperature": "Température de base",
           "temperature_unit": "Unité de température",
-          "include_cooling": "Inclure les degrés-jours de refroidissement (DJR)"
+          "include_cooling": "Inclure les degrés-jours de refroidissement (DJR)",
+          "include_weekly": "Inclure les capteurs hebdomadaires",
+          "include_monthly": "Inclure les capteurs mensuels"
         }
       }
     },

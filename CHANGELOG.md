@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-03-25
+
+### Added
+- Added Cooling Degree Days (CDD) calculation
+- Added option to enable/disable weekly and monthly sensors
+- Added improved debugging logs throughout the integration
+- Added validation to ensure only temperature sensors can be selected
+
+### Changed
+- Renamed integration from "Heating Degree Days" to "Heating & Cooling Degree Days"
+- Improved calculation method for daily values using numerical integration
+- Updated title display based on configured options
+- Fixed sensor entity_id generation
+
 ## [1.0.0-alpha.2] - 2025-02-14
 
 ### Changed

@@ -8,10 +8,14 @@ CONF_TEMPERATURE_SENSOR = "temperature_sensor"
 CONF_BASE_TEMPERATURE = "base_temperature"
 CONF_TEMPERATURE_UNIT = "temperature_unit"
 CONF_INCLUDE_COOLING = "include_cooling"
+CONF_INCLUDE_WEEKLY = "include_weekly"
+CONF_INCLUDE_MONTHLY = "include_monthly"
 
 DEFAULT_BASE_TEMPERATURE = 65.0
 DEFAULT_NAME = "Heating & Cooling Degree Days"
 DEFAULT_INCLUDE_COOLING = False
+DEFAULT_INCLUDE_WEEKLY = True
+DEFAULT_INCLUDE_MONTHLY = True
 SCAN_INTERVAL = timedelta(minutes=5)
 
 # HDD Sensor types
