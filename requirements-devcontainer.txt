@@ -2,4 +2,4 @@ colorlog==6.9.0
 ruff==0.9.9
 bump2version
 wheel
-hassil==2.2.3
+hassil==3.0.0
